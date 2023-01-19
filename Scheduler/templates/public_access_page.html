@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="{% static 'scheduler_style.css' %}" rel="stylesheet"></link>
+    <script type="text/javascript" src="{% static 'scheduler.js' %}"></script>
+</head>
+<body onload="on_start()">
+    <h1 class="sr-only">This site contains several windows that are moved into view in sequence. 
+        When not in view, they live on the "hidden" div, which is located immediately after this 
+        message. The currently active window is moved to a div with the id of "shown", and this 
+        is where you should go to when using this site. You can also search for a div with the id
+        of state_a, for inputing your name, email, and meeting objectives. State_b will allow you
+        to select a meeting date and time. Finally, state_c will display the information you 
+        entered, and allow you to submit a request to meet with me.
+    </h1>
+    <div id="hidden" class="display">
+
+        {% comment %} State A {% endcomment %}
+        <div id="state_a" class="state" >
+            
+                <div class="container">
+                    <h3>What are your details?</h3>
+                    <div>
+                        <label for="nameInput"><span class="required">*</span>Name:</label>
+                        <input type="text" id="nameInput" name="nameInput" placeholder="Your name..">
+                    </div>
+                    <div>
+                        <label for="emailInput"><span class="required">*</span>Email:</label>
+                        <input type="text" id="emailInput" name="emailInput" placeholder="your@email.com">
+                    </div>
+                    <p><h6><span class="footnote">Don't worry, I will only use your email 
+                to advance our meeting objectives.</span></h6></p>
+                </div>
+                <div class="container">
+                    <p><h3>You can let me know your meeting objectives here.</h3></p>
+                    <textarea id="objectiveInput" name="objectiveInput" rows="4" col="70"></textarea>
+                </div>
+                <div class="container">
+                    <button type="button" onclick="submit_state_a()">Next</button>
+                </div>
+        </div>
+
+        {% comment %} State B {% endcomment %}
+        <div id="state_b" class="state">
+            <p><h3>Choosing duration and date will allow you to select from my available times.</h2></p>
+            <div id="durs" class="container">
+                <p><h4>Duration:</h4></p>
+                <h1 class="sr-only">The following is a list of 5 possible meeting durations that you can select from.</h1>
+                <div id="15" class="cell dur" onclick="select_duration(this)">15</div>
+                <div id="30" class="cell dur" onclick="select_duration(this)">30</div>
+                <div id="60" class="cell dur" onclick="select_duration(this)">60</div>
+                <div id="90" class="cell dur" onclick="select_duration(this)">90</div>
+                <div id="120" class="cell dur" onclick="select_duration(this)">120</div>
+            </div>
+            <div class="container">
+                <div id="days">
+                    <h4>Days:</h4>
+                    <h1 class="sr-only">The following day-list includes all the days in which I have availability for the selected duration.</h1>
+                    <div id="daylist"></div>
+                </div>
+                <div id="times">
+                    <h4>Times:</h4>
+                    <h1 class="sr-only">The following time-list will include click-able divs representing meeting start times for you to select. They will only appear after a duration and date are selected.</h1>
+                    <div id="timelist"></div>
+                </div>
+            </div>
+            <div class="container">
+                <button type="button" onclick="load_layout('state_a')">Back</button>
+                <button type="button" onclick="submit_state_b()">Next</button>
+            </div>           
+        </div>
+
+        {% comment %} State C {% endcomment %}
+        <div id="state_c" class="state">
+            <div class="container">
+                <p><h3>Please confirm and submit.</h2></p>
+                <p>
+                    <h5 id="nameConfirm"></h5>
+                    <h5 id="emailConfirm"></h5>
+                    <h5 id="dateConfirm"></h5>
+                    <h5 id="timeConfirm"></h5>
+                    <h5 id="objectiveConfirm"></h5>
+                </p>
+            </div>  
+            <div class="container">
+                <button type="button" onclick="load_layout('state_b')">Back</button>
+                <button type="button" onclick="submit_final()">Submit</button>
+                <p><h3 id="final-notification" class="required"></h3></p>
+            </div>
+            
+        </div> 
+
+        {% comment %} Loading Throbber {% endcomment %}
+        <div id="throbber" >
+
+            
+            <div id="ship">
+                <p><h5>loading...</h5></p>
+                <img src="{% static 'images/ship-ring.png' %}" alt="Cartoonish space ship resembling the US space shuttle."></img>
+                <div id="astronaut">
+                    <img src="{% static 'images/astronaut-ring.png' %}" alt="Cartoon astronaut floating aruond a circular path."></img>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% comment %} Background Image {% endcomment %}
+    <div id="bg">
+        <img src="{% static 'images/bg(horz).png' %}" alt="Spaceship control panel and window with planets and stars outside."></img>
+    </div>
+
+    {% comment %} Container for shown divs {% endcomment %}
+    <div id="shown" class="display"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
+
+</body>
+</html>

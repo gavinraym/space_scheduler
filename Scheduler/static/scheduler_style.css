@@ -1,0 +1,164 @@
+
+:root {
+    background: rgb(0,0,0);
+    font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+* {
+
+    padding:0%;
+    margin: 0%;
+}
+
+button {
+    padding: 3px;
+    margin: 3px;
+}
+
+img {
+    height: inherit;
+}
+
+p {
+    color: whitesmoke;
+}
+
+#bg {
+    position: fixed;
+    overflow: hidden;
+    bottom:0px;
+    height: 100vh;
+    left: 50%;
+    transform: translatex(-50%);
+}
+
+.display {
+    background: #000;
+
+    position: fixed;
+    bottom: 0px;
+    left: 50%;
+    transform: translate(-50%);
+    bottom: 3%;
+    height: 55vh;
+    width: 55vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.state {
+    position: static;
+    text-align: center;
+    color: rgb(214, 212, 212);    
+    width: 98%;
+
+}
+
+.form li {
+    list-style-type: none;
+}
+
+.container {
+    border-radius: 2%;
+    border-color: rgba(0, 255, 255, 0.205);
+    border-width: 2px;
+    border-style: solid;
+    padding: 3px;
+    margin: 3px;
+    overflow: auto;
+    width:97%;
+}
+
+#durs {
+    
+}
+
+#days {
+    width: 30%;
+    float:left;
+}
+
+#times {
+    width: 60%;
+    float: right;
+    overflow: hidden;
+    min-height: 150px;
+}
+
+#timelist {
+    position: inherit;
+    padding-left: 0%;
+    padding-right: 2px; 
+}
+
+.cell {
+    border-radius: 2px;
+    border-color: rgb(75, 79, 82);
+    border-style: solid;
+    border-width: 1px;
+    cursor: pointer;
+}
+
+.dur {
+    display: inline-block; 
+    width: 12%;
+}
+
+.day {
+    width: 100%;
+    
+}
+
+.time {
+    width: fit-content;
+    padding-right: 3px;
+    display: inline-block;
+}
+
+.chosen {
+    border-color: red;
+    background-color: purple;
+    color: black;
+}
+
+.required { 
+    color:red;
+}
+
+#throbber {
+    position:absolute;
+    float: right;
+    width: 200px; 
+    height: 200px;
+}
+
+#ship {
+    position: absolute;
+    transform: translate(25px, 25px);
+    height: 100px;
+    width: 100px;
+
+}
+
+#astronaut {
+    position: absolute;
+    top:57px;
+    left:40px;
+    height:100px;
+    width:100px;
+    transform: translate(15%,15%);
+    transform-origin: 10% 10%;
+    animation: orbit 5s infinite linear;
+}
+
+@keyframes orbit {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
+}
+
+
+

@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link href="{% static 'admin_style.css' %}" rel="stylesheet"></link>
+    <script type="text/javascript" src="{% static 'admin.js' %}"></script> 
+</head>
+<body onload="on_start()">
+
+    <div class="container">
+
+        <!--Reports section-->
+        <div class="row border">
+            <div class="col">
+                Reports:
+                <button type="button" onclick="show_report('active')">Active Meetings</button>
+                <button type="button" onclick="show_report('archive')">Archived Meetings</button>
+
+            </div>
+        </div>
+
+
+        <!--Change week on schedule-->
+        <div class="border">
+            <div class="row d-flex justify-content-around">
+                <div>
+                    <button onclick="prev_week()">Previous week</button>
+                </div>
+                <div>
+                    <div id="week-title">Week start date</div>
+                </div>
+                <div>
+                    <button onclick="next_week()">Next week</button>
+                </div>  
+            </div>
+
+            <!--Weekly schedule-->     
+            <div id="weekly-schedule" class="border"></div>
+
+            <!--Add timeslot-->
+            <div class="row">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="ts-start">Start: </label>
+                        <input type="datetime-local" class="form-control" id="ts-start" placeholder="14:30" name="ts-start">
+                    </div>
+                    <div class="form-group">
+                        <label for="ts-end">End: </label>
+                        <input type="datetime-local" class="form-control" id="ts-end" placeholder="15:30" name="ts-end">
+                    </div>
+                    <button type="button" onclick="add_timeslot();">Add timeslot</button>
+
+                    <div id="loading-timeslot-submit" style="opacity:0;">Loading...</div>
+                </form>
+            </div>
+        </div>
+
+        
+           
+        <div class="row d-flex justify-content-around">
+            <!--Appointments list-->
+            <div id="appmnt-list"  class="col-3 border"></div>
+            <!--Detailed meeting-->
+            <div id="appmnt-detail" class="col-8 border" style="">
+                <div id="meetings-container" class="container"></div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script> 
+</body>
+</html>
+
